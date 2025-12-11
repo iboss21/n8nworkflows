@@ -20,6 +20,9 @@ wheels/
 .installed.cfg
 *.egg
 
+# Exclude Python lib but allow Next.js website/lib
+!website/lib/
+
 # Virtual environments
 .env
 .venv
@@ -81,6 +84,14 @@ workflow_rename_log.json
 # Node.js artifacts (if using npm)
 node_modules/
 package-lock.json
+
+# Next.js
+website/.next/
+website/out/
+website/build/
+website/.env*.local
+*.tsbuildinfo
+next-env.d.ts
 
 #db
 *.db-shm

@@ -2,8 +2,18 @@
 
 A professionally organized collection of **2,057 n8n workflows** with a lightning-fast documentation system that provides instant search, analysis, and browsing capabilities.
 
-> **⚠️ IMPORTANT NOTICE (Aug 14, 2025):** Repository history has been rewritten due to DMCA compliance. If you have a fork or local clone, please see [Issue 85](https://github.com/Zie619/n8n-workflows/issues/85) for instructions on syncing your copy.
+> **🎉 NEW: Modern Landing Page & Knowledge Base!** 
 > 
+> We've added a stunning Next.js landing page with comprehensive documentation! 
+> - 🎨 Beautiful modern UI with animations
+> - 📚 Full knowledge base with tutorials
+> - 🔍 Enhanced workflow browser
+> - 🚀 Easy deployment with Docker & Coolify
+> 
+> **[Learn More →](WEBSITE_README.md)** | **[View Screenshots](https://github.com/user-attachments/assets/f7a7e166-00cb-42f1-9ff3-a03a67804871)**
+
+> **⚠️ IMPORTANT NOTICE (Aug 14, 2025):** Repository history has been rewritten due to DMCA compliance. If you have a fork or local clone, please see [Issue 85](https://github.com/Zie619/n8n-workflows/issues/85) for instructions on syncing your copy.
+>
 ## Support My Work
 
 [![Buy Me a Coffee](https://img.shields.io/badge/-Buy%20Me%20a%20Coffee-ffdd00?logo=buy-me-a-coffee&logoColor=black&style=flat)](https://www.buymeacoffee.com/zie619)

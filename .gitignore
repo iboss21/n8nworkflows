@@ -20,6 +20,9 @@ wheels/
 .installed.cfg
 *.egg
 
+# Exclude Python lib but allow Next.js website/lib
+!website/lib/
+
 # Virtual environments
 .env
 .venv

@@ -82,6 +82,14 @@ workflow_rename_log.json
 node_modules/
 package-lock.json
 
+# Next.js
+website/.next/
+website/out/
+website/build/
+website/.env*.local
+*.tsbuildinfo
+next-env.d.ts
+
 #db
 *.db-shm
 *.db-wal

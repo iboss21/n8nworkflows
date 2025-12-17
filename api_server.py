@@ -114,6 +114,16 @@ async def root():
         """)
     return FileResponse(str(index_file))
 
+@app.get("/dashboard")
+async def dashboard():
+    """Serve the enhanced copy-paste ready dashboard."""
+    static_dir = Path("static")
+    dashboard_file = static_dir / "dashboard.html"
+    if dashboard_file.exists():
+        return FileResponse(str(dashboard_file))
+    # Fallback to main index
+    return FileResponse(str(static_dir / "index.html"))
+
 @app.get("/health")
 async def health_check():
     """Health check endpoint."""
@@ -388,33 +398,39 @@ async def get_integrations():
 
 @app.get("/api/categories")
 async def get_categories():
-    """Get available workflow categories for filtering."""
+    """Get available workflow categories for filtering with counts."""
     try:
         # Try to load from the generated unique categories file
         categories_file = Path("context/unique_categories.json")
-        if categories_file.exists():
+        search_categories_file = Path("context/search_categories.json")
+        
+        if search_categories_file.exists():
+            with open(search_categories_file, 'r', encoding='utf-8') as f:
+                search_data = json.load(f)
+            
+            # Count workflows per category
+            from collections import Counter
+            category_counts = Counter()
+            for item in search_data:
+                category = item.get('category', 'Uncategorized')
+                category_counts[category] += 1
+            
+            # Format as list of objects with name and count
+            categories = [
+                {"name": cat, "count": count}
+                for cat, count in sorted(category_counts.items())
+            ]
+            return categories
+        elif categories_file.exists():
             with open(categories_file, 'r', encoding='utf-8') as f:
                 categories = json.load(f)
-            return {"categories": categories}
+            # Ensure format with counts
+            if categories and isinstance(categories[0], str):
+                categories = [{"name": cat, "count": 0} for cat in categories]
+            return categories
         else:
-            # Fallback: extract categories from search_categories.json
-            search_categories_file = Path("context/search_categories.json")
-            if search_categories_file.exists():
-                with open(search_categories_file, 'r', encoding='utf-8') as f:
-                    search_data = json.load(f)
-                
-                unique_categories = set()
-                for item in search_data:
-                    if item.get('category'):
-                        unique_categories.add(item['category'])
-                    else:
-                        unique_categories.add('Uncategorized')
-                
-                categories = sorted(list(unique_categories))
-                return {"categories": categories}
-            else:
-                # Last resort: return basic categories
-                return {"categories": ["Uncategorized"]}
+            # Last resort: return basic categories
+            return [{"name": "Uncategorized", "count": 0}]
                 
     except Exception as e:
         print(f"Error loading categories: {e}")
